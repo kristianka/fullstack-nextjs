@@ -24,3 +24,9 @@ export const addLikeToBlog = async (formData: FormData) => {
     revalidatePath(`/blogs`);
     revalidatePath(`/blogs/${id}`);
 };
+
+export const searchBlog = async (formData: FormData) => {
+    // there should be validation here in a real app
+    const title = formData.get("title");
+    redirect(`/blogs/?search=${title}`);
+};

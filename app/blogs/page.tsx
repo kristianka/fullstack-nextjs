@@ -1,11 +1,23 @@
 import Link from "next/link";
 import { getBlogs } from "../services/blogs";
+import { searchBlog } from "../actions/blogs";
 
-export default function Blogs() {
-    const blogs = getBlogs();
+const Blogs = async ({ searchParams }: { searchParams: Promise<{ search?: string }> }) => {
+    const { search } = await searchParams;
+    const allBlogs = getBlogs();
+
+    const blogs = search
+        ? allBlogs.filter((b) => b.title.toLowerCase().includes(search.toLowerCase()))
+        : allBlogs; // fallback
+
     return (
         <div>
             <h1>Blogs</h1>
+            <form action={searchBlog}>
+                <input type="text" name="title" />
+                <button type="submit">Search</button>
+            </form>
+
             <ul>
                 {blogs.map((b) => {
                     return (
@@ -22,4 +34,6 @@ export default function Blogs() {
             </ul>
         </div>
     );
-}
+};
+
+export default Blogs;
