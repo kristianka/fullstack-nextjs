@@ -4,11 +4,7 @@ import { searchBlog } from "../actions/blogs";
 
 const Blogs = async ({ searchParams }: { searchParams: Promise<{ search?: string }> }) => {
     const { search } = await searchParams;
-    const allBlogs = getBlogs();
-
-    const blogs = search
-        ? allBlogs.filter((b) => b.title.toLowerCase().includes(search.toLowerCase()))
-        : allBlogs; // fallback
+    const blogs = await getBlogs(search);
 
     return (
         <div>
