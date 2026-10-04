@@ -22,7 +22,7 @@ const blogs: Blog[] = [
 let nextId = 4;
 
 export const getBlogs = () => {
-    return blogs;
+    return blogs.sort((a, b) => b.likes - a.likes); // desc
 };
 
 export const getBlogById = (id: number) => {
