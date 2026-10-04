@@ -33,3 +33,16 @@ export const getBlogById = (id: number) => {
 export const addBlog = ({ title, author, url, likes }: Omit<Blog, "id">) => {
     blogs.push({ id: nextId++, title, author, url, likes });
 };
+
+export const likeBlog = (id: number) => {
+    const blog = getBlogById(id);
+
+    if (!blog) {
+        console.log("blog not found");
+        return null;
+    }
+
+    blog.likes = blog.likes + 1; // mutates blog object!
+    console.log(`liked blog ${blog.title}, likes are now ${blog.likes}`);
+    return blog;
+};
