@@ -25,6 +25,10 @@ export const getBlogs = () => {
     return blogs;
 };
 
+export const getBlogById = (id: number) => {
+    return blogs.find((b) => b.id === id);
+};
+
 // no need to retype, just omit id. You could also use Pick if the type evolves
 export const addBlog = ({ title, author, url, likes }: Omit<Blog, "id">) => {
     blogs.push({ id: nextId++, title, author, url, likes });
