@@ -5,7 +5,18 @@ import { addBlog, likeBlog } from "../services/blogs";
 import { revalidatePath } from "next/cache";
 import { auth } from "../auth";
 
-export const createBlog = async (prevState: { error: string }, formData: FormData) => {
+type BlogErrors = {
+    title?: string;
+    author?: string;
+    url?: string;
+};
+
+type BlogFormState = {
+    errors: BlogErrors;
+    values: { title: string; author: string; url: string };
+};
+
+export const createBlog = async (prevState: BlogFormState, formData: FormData): Promise<BlogFormState> => {
     const session = await auth();
     if (!session) {
         redirect("/login");
@@ -19,16 +30,23 @@ export const createBlog = async (prevState: { error: string }, formData: FormDat
         likes: 0
     };
 
+    const errors: BlogErrors = {};
+
     if (!blog.title || blog.title.length < 5) {
-        return { error: "Blog title must be at least 5 characters long" };
+        errors.title = "Blog title must be at least 5 characters long";
     }
 
     if (!blog.author || blog.author.length < 5) {
-        return { error: "Blog author must be at least 5 characters long" };
+        errors.author = "Blog author must be at least 5 characters long";
     }
 
     if (!blog.url || blog.url.length < 5) {
-        return { error: "Blog URL must be at least 5 characters long" };
+        errors.url = "Blog URL must be at least 5 characters long";
+    }
+
+    // if any errors, return to client
+    if (Object.keys(errors).length > 0) {
+        return { errors, values: { title: blog.title, author: blog.author, url: blog.url } };
     }
 
     await addBlog({ title: blog.title, author: blog.author, url: blog.url, likes: blog.likes }); // we could pass blog obj too
