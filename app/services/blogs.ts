@@ -1,4 +1,4 @@
-import { desc, eq, ilike } from "drizzle-orm";
+import { desc, eq, ilike, sql } from "drizzle-orm";
 import { db } from "../../db";
 import { blogs } from "../../db/schema";
 
@@ -34,7 +34,16 @@ export const getBlogById = async (id: number) => {
 
 // no need to retype, just omit id. You could also use Pick if the type evolves
 export const addBlog = async ({ title, author, url, likes }: Omit<Blog, "id">) => {
-    await db.insert(blogs).values({ title, author, url, likes: 0 });
+    const user = await db.query.users.findFirst({
+        orderBy: sql`RANDOM()`
+    });
+
+    if (!user) {
+        console.log("no user found");
+        return null;
+    }
+
+    await db.insert(blogs).values({ title, author, url, likes: 0, userId: user?.id });
 };
 
 export const likeBlog = async (id: number) => {
