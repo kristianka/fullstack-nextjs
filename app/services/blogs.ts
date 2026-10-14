@@ -1,6 +1,7 @@
 import { desc, eq, ilike, sql } from "drizzle-orm";
 import { db } from "../../db";
 import { blogs } from "../../db/schema";
+import { getCurrentUser } from "./session";
 
 // makes code more typesafe
 interface Blog {
@@ -34,9 +35,10 @@ export const getBlogById = async (id: number) => {
 
 // no need to retype, just omit id. You could also use Pick if the type evolves
 export const addBlog = async ({ title, author, url, likes }: Omit<Blog, "id">) => {
-    const user = await db.query.users.findFirst({
-        orderBy: sql`RANDOM()`
-    });
+    const user = await getCurrentUser();
+    if (!user) {
+        throw new Error("Not logged in");
+    }
 
     if (!user) {
         console.log("no user found");

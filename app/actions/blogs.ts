@@ -3,8 +3,14 @@
 import { redirect } from "next/navigation";
 import { addBlog, likeBlog } from "../services/blogs";
 import { revalidatePath } from "next/cache";
+import { auth } from "../auth";
 
 export const createBlog = async (formData: FormData) => {
+    const session = await auth();
+    if (!session) {
+        redirect("/login");
+    }
+
     // there should be validation here in a real app
     const blog = {
         title: formData.get("title") as string,
