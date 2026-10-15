@@ -14,9 +14,13 @@ type BlogErrors = {
 type BlogFormState = {
     errors: BlogErrors;
     values: { title: string; author: string; url: string };
+    success: boolean;
 };
 
-export const createBlog = async (prevState: BlogFormState, formData: FormData): Promise<BlogFormState> => {
+export const createBlog = async (
+    prevState: BlogFormState,
+    formData: FormData
+): Promise<BlogFormState> => {
     const session = await auth();
     if (!session) {
         redirect("/login");
@@ -46,12 +50,20 @@ export const createBlog = async (prevState: BlogFormState, formData: FormData): 
 
     // if any errors, return to client
     if (Object.keys(errors).length > 0) {
-        return { errors, values: { title: blog.title, author: blog.author, url: blog.url } };
+        return {
+            errors,
+            success: false,
+            values: { title: blog.title, author: blog.author, url: blog.url }
+        };
     }
 
     await addBlog({ title: blog.title, author: blog.author, url: blog.url, likes: blog.likes }); // we could pass blog obj too
     revalidatePath("/blogs");
-    redirect("/blogs");
+    return {
+        errors: {},
+        success: true,
+        values: { title: blog.title, author: blog.author, url: blog.url }
+    };
 };
 
 export const addLikeToBlog = async (formData: FormData) => {
