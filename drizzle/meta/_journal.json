@@ -36,6 +36,13 @@
       "when": 1792066557483,
       "tag": "0004_long_captain_midlands",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792069974199,
+      "tag": "0005_slim_skullbuster",
+      "breakpoints": true
     }
   ]
 }

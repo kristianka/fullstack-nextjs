@@ -5,7 +5,9 @@ import { auth } from "../auth";
 import { notFound, redirect } from "next/navigation";
 
 export const getUsers = async () => {
-    return db.query.users.findMany();
+    return db.query.users.findMany({
+        columns: { passwordHash: false }
+    });
 };
 
 export const getUserById = async (id: number) => {
@@ -22,6 +24,7 @@ export const getBlogsByUserId = async (userId: number) => {
 
 export const getUserWithBlogs = async (username: string) => {
     return db.query.users.findFirst({
+        columns: { passwordHash: false },
         where: eq(users.username, username),
         with: { blogs: true }
     });
@@ -35,7 +38,15 @@ export const getMe = async () => {
     }
 
     const user = await db.query.users.findFirst({
-        where: eq(users.id, Number(session.user.id))
+        columns: { passwordHash: false },
+        where: eq(users.id, Number(session.user.id)),
+        with: {
+            readingList: {
+                with: {
+                    blog: true
+                }
+            }
+        }
     });
 
     if (!user) {
