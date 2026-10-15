@@ -7,27 +7,34 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ search?: string
     const blogs = await getBlogs(search);
 
     return (
-        <div>
-            <h1>Blogs</h1>
+        <div className="max-w-2xl mx-auto p-6">
+            <h1 className="text-2xl font-bold mb-4">Blogs</h1>
             <form action={searchBlog}>
-                <input type="text" name="title" />
-                <button type="submit">Search</button>
+                <input type="text" name="title" className="border rounded-xl px-5" />
+                <button type="submit" className="border rounded-xl ml-3 px-5">
+                    Search
+                </button>
             </form>
 
-            <ul>
-                {blogs.map((b) => {
-                    return (
-                        <li key={b.id}>
-                            <Link href={`/blogs/${b.id}`}>
-                                <span style={{ fontWeight: "bold" }}>{b.title}</span>
-                                <span style={{ marginLeft: "0.5rem" }}>
-                                    Author: {b.author} | {b.likes} likes | {b.url}
-                                </span>
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className="mt-8">
+                <ul className="space-y-2">
+                    {blogs.map((b) => {
+                        return (
+                            <li key={b.id}>
+                                <Link
+                                    href={`/blogs/${b.id}`}
+                                    className="text-blue-600 hover:underline"
+                                >
+                                    <span className="font-bold"> {b.title}</span>
+                                    <span className="ml-3">
+                                        Author: {b.author} | {b.likes} likes | {b.url}
+                                    </span>
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
         </div>
     );
 };

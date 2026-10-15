@@ -9,11 +9,14 @@ export default function Notification() {
 
     const style: React.CSSProperties = {
         padding: "10px 16px",
-        marginBottom: "10px",
         borderRadius: "4px",
         color: "white",
         backgroundColor: type === "success" ? "#16a34a" : "#dc2626"
     };
 
-    return <div style={style}>{message}</div>;
+    return (
+        <div style={style} className="max-w-2xl mx-auto my-1">
+            {message}
+        </div>
+    );
 }
