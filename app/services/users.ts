@@ -44,3 +44,19 @@ export const getMe = async () => {
 
     return user;
 };
+
+export const getUserByToken = async (token: string) => {
+    // don't reveal as much data
+    return db.query.users.findFirst({
+        columns: { passwordHash: false, token: false },
+        where: eq(users.token, token),
+        with: {
+            blogs: {
+                columns: {
+                    likes: false,
+                    userId: false
+                }
+            }
+        }
+    });
+};
