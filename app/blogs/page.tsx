@@ -7,7 +7,7 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ search?: string
     const blogs = await getBlogs(search);
 
     return (
-        <div className="max-w-2xl mx-auto p-6">
+        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
             <h1 className="text-2xl font-bold mb-4">Blogs</h1>
             <form action={searchBlog}>
                 <input type="text" name="title" className="border rounded-xl px-5" />

@@ -3,6 +3,8 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CustomLabel } from "../components/CustomLabel";
+import { LargeButton } from "../components/LargeButton";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -27,23 +29,17 @@ export default function LoginPage() {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
+        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
+            <h2 className="text-2xl font-bold mb-4">Login</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>
-                        Username
-                        <input type="text" name="username" required />
-                    </label>
+                    <CustomLabel text="Username" type="text" name="username" required />
                 </div>
                 <div>
-                    <label>
-                        Password
-                        <input type="password" name="password" required />
-                    </label>
+                    <CustomLabel text="Password" type="password" name="password" required />
                 </div>
-                <button type="submit">Login</button>
+                <LargeButton text="Login" type="submit" />
             </form>
         </div>
     );

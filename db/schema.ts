@@ -1,6 +1,9 @@
 import { relations } from "drizzle-orm";
 import { pgTable, serial, text, integer, boolean } from "drizzle-orm/pg-core";
 
+// npx drizzle-kit generate
+// npx drizzle-kit migrate
+
 export const blogs = pgTable("blogs", {
     id: serial("id").primaryKey(),
     title: text("title").notNull(),
@@ -16,7 +19,8 @@ export const users = pgTable("users", {
     id: serial("id").primaryKey(),
     username: text("username").notNull().unique(),
     name: text("name").notNull(),
-    passwordHash: text("password_hash").notNull().default("")
+    passwordHash: text("password_hash").notNull().default(""),
+    token: text("token").unique()
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

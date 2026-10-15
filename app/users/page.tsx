@@ -5,7 +5,7 @@ const Users = async () => {
     const users = await getUsers();
 
     return (
-        <div className="max-w-2xl mx-auto p-6">
+        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
             <h2 className="text-2xl font-bold mb-4">Users</h2>
             <ul>
                 {users.map((user) => (

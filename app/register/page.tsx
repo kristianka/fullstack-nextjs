@@ -2,6 +2,8 @@
 
 import { registerUser } from "../actions/users";
 import { useActionState } from "react";
+import { LargeButton } from "../components/LargeButton";
+import { CustomLabel } from "../components/CustomLabel";
 
 export default function RegisterPage() {
     const [state, formAction] = useActionState(registerUser, {
@@ -18,8 +20,8 @@ export default function RegisterPage() {
     });
 
     return (
-        <div>
-            <h2>Register</h2>
+        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
+            <h2 className="text-2xl font-bold mb-4">Register</h2>
             <form
                 action={formAction}
                 style={{
@@ -30,40 +32,33 @@ export default function RegisterPage() {
                 }}
             >
                 <div>
-                    <label>
-                        Username
-                        <input type="text" name="username" required />
-                    </label>
+                    <CustomLabel text="Username" type="text" name="username" required />
                     {state.errors.username && (
                         <p style={{ color: "red" }}>{state.errors.username}</p>
                     )}
                 </div>
                 <div>
-                    <label>
-                        Name
-                        <input type="text" name="name" required />
-                    </label>
+                    <CustomLabel text="Name" type="text" name="name" required />
                 </div>
                 <div>
-                    <label>
-                        Password
-                        <input type="password" name="password" required />
-                    </label>
+                    <CustomLabel text="Password" type="password" name="password" required />
                     {state.errors.password && (
                         <p style={{ color: "red" }}>{state.errors.password}</p>
                     )}
                 </div>
                 <div>
-                    <label>
-                        Confirm password
-                        <input type="password" name="passwordConfirm" required />
-                    </label>
+                    <CustomLabel
+                        text="Confirm password"
+                        type="password"
+                        name="passwordConfirm"
+                        required
+                    />
                     {state.errors.passwordConfirm && (
                         <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>
                     )}
                 </div>
 
-                <button type="submit">Register</button>
+                <LargeButton text="Register" type="submit" />
             </form>
         </div>
     );

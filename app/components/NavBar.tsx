@@ -26,7 +26,8 @@ export default function NavBar() {
                     <>
                         <CustomLink href="/blogs/new" text="create new" />
                         {" | "}
-                        <em className="text-gray-300">{session.user?.name} logged in</em>{" "}
+                        <CustomLink href="/me" text="me" />
+                        {" | "}
                         <button
                             onClick={() => signOut()}
                             className="bg-gray-600 hover:bg-gray-500 px-3 py-1 rounded text-sm"
