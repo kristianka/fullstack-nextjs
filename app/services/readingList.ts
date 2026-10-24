@@ -18,3 +18,12 @@ export const getBlogReadingListState = async (userId: number, blogId: number) =>
 
     return res !== undefined; // does entry exist
 };
+
+export const markAsDone = async (userId: number, blogId: number) => {
+    const res = await db
+        .update(readingList)
+        .set({ read: true })
+        .where(and(eq(readingList.blogId, Number(blogId)), eq(readingList.userId, userId)));
+
+    return res;
+};
