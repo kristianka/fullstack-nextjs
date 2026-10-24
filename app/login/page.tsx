@@ -31,7 +31,11 @@ export default function LoginPage() {
     return (
         <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
             <h2 className="text-2xl font-bold mb-4">Login</h2>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && (
+                <p style={{ color: "red" }} data-testid="error-message">
+                    {error}
+                </p>
+            )}
             <form onSubmit={handleSubmit}>
                 <div>
                     <CustomLabel text="Username" type="text" name="username" required />
@@ -39,7 +43,7 @@ export default function LoginPage() {
                 <div>
                     <CustomLabel text="Password" type="password" name="password" required />
                 </div>
-                <LargeButton text="Login" type="submit" />
+                <LargeButton text="Login" type="submit" testId="login-button" />
             </form>
         </div>
     );

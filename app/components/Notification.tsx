@@ -15,7 +15,7 @@ export default function Notification() {
     };
 
     return (
-        <div style={style} className="max-w-2xl mx-auto my-1">
+        <div style={style} className="max-w-2xl mx-auto my-1" data-testid="notification">
             {message}
         </div>
     );

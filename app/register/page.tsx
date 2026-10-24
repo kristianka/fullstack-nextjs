@@ -34,7 +34,9 @@ export default function RegisterPage() {
                 <div>
                     <CustomLabel text="Username" type="text" name="username" required />
                     {state.errors.username && (
-                        <p style={{ color: "red" }}>{state.errors.username}</p>
+                        <p style={{ color: "red" }} data-testid="username-error">
+                            {state.errors.username}
+                        </p>
                     )}
                 </div>
                 <div>
@@ -48,17 +50,19 @@ export default function RegisterPage() {
                 </div>
                 <div>
                     <CustomLabel
-                        text="Confirm password"
+                        text="Confirm Password"
                         type="password"
                         name="passwordConfirm"
                         required
                     />
                     {state.errors.passwordConfirm && (
-                        <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>
+                        <p style={{ color: "red" }} data-testid="passwordConfirm-error">
+                            {state.errors.passwordConfirm}
+                        </p>
                     )}
                 </div>
 
-                <LargeButton text="Register" type="submit" />
+                <LargeButton text="Register" type="submit" testId="register-button" />
             </form>
         </div>
     );

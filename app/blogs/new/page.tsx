@@ -78,7 +78,7 @@ export default function NewBlog() {
                     />
                     {state.errors.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
                 </div>
-                <LargeButton text="Add Blog" type="submit" />
+                <LargeButton text="Create" type="submit" testId="create-blog-button" />
             </form>
         </div>
     );

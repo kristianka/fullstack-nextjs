@@ -22,9 +22,13 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const ownBlog = blog.userId === Number(userId);
 
     return (
-        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
-            <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
-            <h3 className="text-lg">by {blog.author}</h3>
+        <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl" data-testid="blog-detail">
+            <h2 className="text-2xl font-bold mb-2" data-testid="blog-title">
+                {blog.title}
+            </h2>
+            <h3 className="text-lg" data-testid="blog-author">
+                by {blog.author}
+            </h3>
             <div className="mt-2">
                 <Link
                     href={blog.url}
@@ -50,6 +54,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <LargeButton
                         text={inReadingList ? "In reading list" : "Add to reading list"}
                         disabled={inReadingList}
+                        testId="add-to-reading-list-button"
                     />
                 </form>
             )}

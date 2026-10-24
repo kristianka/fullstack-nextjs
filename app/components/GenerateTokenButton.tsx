@@ -11,7 +11,10 @@ export default function GenerateTokenButton() {
 
     return (
         <form action={generateApiToken} onSubmit={handleSubmit}>
-            <button className="mt-3 bg-blue-500 text-white rounded-xl p-2.5 px-5 hover:bg-blue-600 ">
+            <button
+                className="mt-3 bg-blue-500 text-white rounded-xl p-2.5 px-5 hover:bg-blue-600 "
+                data-testid="generate-token-button"
+            >
                 Generate new token
             </button>
         </form>

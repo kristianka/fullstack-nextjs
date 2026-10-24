@@ -10,14 +10,23 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ search?: string
         <div className="max-w-2xl mx-auto p-6 mt-10 shadow rounded-xl">
             <h1 className="text-2xl font-bold mb-4">Blogs</h1>
             <form action={searchBlog}>
-                <input type="text" name="title" className="border rounded-xl px-5" />
-                <button type="submit" className="border rounded-xl ml-3 px-5">
+                <input
+                    type="text"
+                    name="title"
+                    className="border rounded-xl px-5"
+                    data-testid="filter-input"
+                />
+                <button
+                    type="submit"
+                    className="border rounded-xl ml-3 px-5"
+                    data-testid="search-button"
+                >
                     Search
                 </button>
             </form>
 
             <div className="mt-8">
-                <ul className="space-y-2">
+                <ul className="space-y-2" data-testid="blogs-list">
                     {blogs.map((b) => {
                         return (
                             <li key={b.id}>
