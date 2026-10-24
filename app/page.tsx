@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Welcome from "@/app/markdown/welcome.mdx";
 
 export default function Home() {
     return (
@@ -11,6 +12,9 @@ export default function Home() {
             >
                 GitHub
             </Link>
+            <div className="markdown">
+                <Welcome />
+            </div>
         </div>
     );
 }
