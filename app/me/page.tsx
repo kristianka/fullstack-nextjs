@@ -19,6 +19,10 @@ const Me = async () => {
             <div className="mt-3" data-testid="reading-list-section">
                 <h3 className="text-xl font-bold mt-10">Reading List</h3>
 
+                {readingList.length === 0 && (
+                    <p data-testid="empty-reading-list">Your reading list is empty</p>
+                )}
+
                 <div data-testid="unread-section">
                     <h4 className="text-lg font-bold mt-4 mb-2">
                         Unread

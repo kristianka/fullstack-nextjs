@@ -39,7 +39,7 @@ export const registerUser = async (
     }
 
     if (password !== passwordConfirm) {
-        errors.password = "Passwords do not match";
+        errors.passwordConfirm = "Passwords do not match";
     }
 
     // check if any users already exist with the same name
@@ -75,7 +75,10 @@ export const generateApiToken = async () => {
     }
 
     const newToken = crypto.randomUUID();
-    await db.update(users).set({ token: newToken }).where(eq(users.id, Number(userId)));
+    await db
+        .update(users)
+        .set({ token: newToken })
+        .where(eq(users.id, Number(userId)));
 
     revalidatePath("/me");
 };

@@ -26,7 +26,6 @@ export default function NewBlog() {
     const router = useRouter();
 
     useEffect(() => {
-        console.log("state", state);
         if (state.success) {
             showNotification("blog created");
             router.push("/blogs");
